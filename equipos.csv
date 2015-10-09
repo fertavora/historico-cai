@@ -1,0 +1,136 @@
+equipos_id,equipos_nombre,equipos_fecha,equipos_estadio,equipos_escudo,ciudades_id,provincia_id,paises_id
+1,"Boca Juniors",NULL,NULL,NULL,10,23,2
+2,"River Plate",NULL,NULL,NULL,10,23,2
+4,"Racing Club",NULL,NULL,NULL,3,9,2
+5,"San Lorenzo de Almagro",NULL,NULL,NULL,10,23,2
+6,"Estudiantes LP",NULL,NULL,NULL,25,9,2
+7,"Chacarita Jrs.",NULL,NULL,NULL,53,9,2
+8,Huracán,NULL,NULL,NULL,10,23,2
+9,"Vélez Sarsfield",NULL,NULL,NULL,10,23,2
+10,"Ferro Carril Oeste",NULL,NULL,NULL,10,23,2
+11,"Argentinos Jrs.",NULL,NULL,NULL,10,23,2
+12,"Gimnasia y Esgrima LP",NULL,NULL,NULL,25,9,2
+13,Platense,NULL,NULL,NULL,70,9,2
+14,Quilmes,NULL,NULL,NULL,44,9,2
+15,"Talleres de Escalada",NULL,NULL,NULL,47,9,2
+16,Tigre,NULL,NULL,NULL,71,9,2
+17,Lanús,NULL,NULL,NULL,26,9,2
+18,Atlanta,NULL,NULL,NULL,10,23,2
+19,Talleres-Lanús,NULL,NULL,NULL,26,9,2
+20,Almagro,NULL,NULL,NULL,10,23,2
+21,"Newell's Old Boys",NULL,NULL,NULL,49,24,2
+22,"Rosario Central",NULL,NULL,NULL,49,24,2
+23,"Argentino de Quilmes",NULL,NULL,NULL,44,9,2
+24,Banfield,NULL,NULL,NULL,5,9,2
+25,"Central Córdoba (Rosario)",NULL,NULL,NULL,49,24,2
+26,"Los Andes",NULL,NULL,NULL,30,9,2
+27,"Colón de Santa Fe",NULL,NULL,NULL,56,24,2
+28,"Unión de Santa Fe",NULL,NULL,NULL,56,24,2
+31,"All Boys",NULL,NULL,NULL,10,23,2
+32,Temperley,NULL,NULL,NULL,66,9,2
+33,"San Telmo",NULL,NULL,NULL,10,23,2
+34,"Estudiantes de Buenos Aires",NULL,NULL,NULL,9,9,2
+35,"Talleres Cba.",NULL,NULL,NULL,14,8,2
+36,Instituto,NULL,NULL,NULL,14,8,2
+37,"Sarmiento de Junín",NULL,NULL,NULL,24,9,2
+38,"Racing de Córdoba",NULL,NULL,NULL,14,8,2
+39,"Nueva Chicago",NULL,NULL,NULL,10,23,2
+40,"San Martín de Mendoza",NULL,NULL,NULL,35,7,2
+41,"Central Córdoba (Santiago del Estero)",NULL,NULL,NULL,59,12,2
+42,"San Lorenzo de Mar del Plata",NULL,NULL,NULL,33,9,2
+43,"Chaco For Ever",NULL,NULL,NULL,48,13,2
+44,"Belgrano Cba.",NULL,NULL,NULL,14,8,2
+45,"Independiente Rivadavia",NULL,NULL,NULL,35,7,2
+46,"San Martín de Tucumán",NULL,NULL,NULL,54,14,2
+48,"Sportivo Desamparados (San Juan)",NULL,NULL,NULL,52,11,2
+50,"Gimnasia y Esgrima (Jujuy)",NULL,NULL,NULL,72,17,2
+51,Kimberley,NULL,NULL,NULL,33,9,2
+52,"San Martín de San Juan",NULL,NULL,NULL,52,11,2
+53,"Juventud Antoniana",NULL,NULL,NULL,50,18,2
+54,"Don Orione",NULL,NULL,NULL,6,13,2
+55,"Huracán (Comodoro Rivadavia)",NULL,NULL,NULL,13,3,2
+56,"Guaraní Antonio Franco",NULL,NULL,NULL,42,20,2
+57,"Bartolomé Mitre",NULL,NULL,NULL,42,20,2
+58,"Independiente (Trelew)",NULL,NULL,NULL,68,3,2
+60,"Atlético Tucumán",NULL,NULL,NULL,54,14,2
+61,"Central Norte (Salta)",NULL,NULL,NULL,50,18,2
+63,"Altos Hornos Zapla",NULL,NULL,NULL,39,17,2
+64,"Jorge Newbery (Junín)",NULL,NULL,NULL,24,9,2
+65,"Huracán San Rafael (Mendoza)",NULL,NULL,NULL,35,7,2
+68,"Deportivo Mandiyú",NULL,NULL,NULL,15,22,2
+69,"Godoy Cruz Antonio Tomba",NULL,NULL,NULL,35,7,2
+73,"Atlético Ledesma",NULL,NULL,NULL,73,17,2
+75,"Deportivo Roca",NULL,NULL,NULL,18,4,2
+78,"Gimnasia y Tiro de Salta",NULL,NULL,NULL,50,18,2
+79,"Atlético Concepción (Tucumán)",NULL,NULL,NULL,54,14,2
+81,"Unión San Vicente",NULL,NULL,NULL,14,8,2
+82,"Estudiantes (Santiago del Estero)",NULL,NULL,NULL,59,12,2
+91,"Ramón Santamarina (Tandil)",NULL,NULL,NULL,64,9,2
+93,"Deportivo Español",NULL,NULL,NULL,10,23,2
+94,"Huracán (Corrientes)",NULL,NULL,NULL,15,22,2
+95,Arsenal,NULL,NULL,NULL,63,9,2
+96,Olimpo,NULL,NULL,NULL,4,9,2
+97,"Atlético Rafaela",NULL,NULL,NULL,46,24,2
+98,"Huracán (Tres Arroyos)",NULL,NULL,NULL,69,9,2
+99,"Atlanta-Argentinos Jrs.",NULL,NULL,NULL,10,23,2
+100,"Tiro Federal",NULL,NULL,NULL,49,24,2
+101,"Deportivo Italiano",NULL,NULL,NULL,17,9,2
+102,"Deportivo Armenio",NULL,NULL,NULL,22,9,2
+103,"Huracán de Ingeniero White",NULL,NULL,NULL,23,9,2
+104,"Alianza Juventud de Pringles",NULL,NULL,NULL,43,9,2
+105,Palmeiras,NULL,NULL,NULL,62,NULL,4
+106,"Alianza Lima",NULL,NULL,NULL,28,NULL,18
+107,Millonarios,NULL,NULL,NULL,8,NULL,6
+108,Santos,NULL,NULL,NULL,62,NULL,4
+109,Nacional,NULL,NULL,NULL,38,NULL,19
+110,Peñarol,NULL,NULL,NULL,38,NULL,19
+111,Guaraní,NULL,NULL,NULL,2,NULL,17
+112,"Deportivo Cali",NULL,NULL,NULL,57,NULL,6
+113,Universitario,NULL,NULL,NULL,28,NULL,18
+114,"Defensor Sporting",NULL,NULL,NULL,38,NULL,19
+115,"Deportes Tolima",NULL,NULL,NULL,21,NULL,6
+116,"Liga Deportiva Universitaria",NULL,NULL,NULL,45,NULL,7
+117,Goias,NULL,NULL,NULL,19,NULL,4
+118,"Deportivo Quito",NULL,NULL,NULL,45,NULL,7
+119,"Atlético Nacional",NULL,NULL,NULL,34,NULL,6
+120,"Independiente Santa Fe",NULL,NULL,NULL,8,NULL,6
+121,Barcelona,NULL,NULL,NULL,20,NULL,7
+122,"São Paulo",NULL,NULL,NULL,62,NULL,4
+123,"Colo Colo",NULL,NULL,NULL,58,NULL,5
+124,Cruzeiro,NULL,NULL,NULL,7,NULL,4
+125,"Unión Española",NULL,NULL,NULL,58,NULL,5
+126,"El Nacional",NULL,NULL,NULL,45,NULL,7
+127,"Sportivo Luqueño",NULL,NULL,NULL,31,NULL,17
+128,Olimpia,NULL,NULL,NULL,2,NULL,17
+129,"Universidad Católica",NULL,NULL,NULL,58,NULL,5
+130,Gremio,NULL,NULL,NULL,41,NULL,4
+131,Blooming,NULL,NULL,NULL,55,NULL,3
+132,Táchira,NULL,NULL,NULL,51,NULL,20
+133,"Estudiantes de Mérida",NULL,NULL,NULL,36,NULL,20
+134,Pepeganga,NULL,NULL,NULL,40,NULL,20
+135,Cerro,NULL,NULL,NULL,38,NULL,19
+136,Cienciano,NULL,NULL,NULL,16,NULL,18
+137,"São Caetano",NULL,NULL,NULL,61,NULL,4
+138,Inter,NULL,NULL,NULL,37,NULL,15
+139,Ajax,NULL,NULL,NULL,1,NULL,12
+140,Juventus,NULL,NULL,NULL,67,NULL,15
+141,"Atlético Madrid",NULL,NULL,NULL,32,NULL,8
+142,Liverpool,NULL,NULL,NULL,29,NULL,14
+144,Olimpia,NULL,NULL,NULL,2,NULL,17
+146,Municipal,NULL,NULL,NULL,65,NULL,13
+147,"Atlético Español",NULL,NULL,NULL,12,NULL,16
+148,"Jubilo Iwata",NULL,NULL,NULL,74,NULL,21
+149,Internacional,NULL,NULL,NULL,41,NULL,4
+150,Colegiales,NULL,NULL,NULL,75,9,2
+151,Liverpool,NULL,NULL,NULL,38,NULL,19
+152,"Boca Unidos",1927-07-17,,,15,22,2
+153,Aldosivi,0000-00-00,,,33,9,2
+154,"Almirante Brown",0000-00-00,,,78,9,2
+155,"Brown de Adrogué",0000-00-00,,,76,9,2
+156,"Crucero del Norte",0000-00-00,,,42,20,2
+157,"Defensa y Justicia",0000-00-00,,,81,9,2
+158,"Douglas Haig",0000-00-00,,,80,9,2
+159,Patronato,0000-00-00,,,82,21,2
+160,"Sportivo Belgrano",0000-00-00,,,79,8,2
+161,"Villa San Carlos",0000-00-00,,,77,9,2
+162,"CF Sacheri",1970-02-11,NULL,NULL,3,9,2
