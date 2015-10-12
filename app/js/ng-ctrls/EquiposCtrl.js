@@ -46,9 +46,16 @@ app.controller('EquiposCtrl',
       $scope.equipo.provincia = $scope.provincias[4];
       $scope.showMessageEquipoOK = true;
     };
+
+    var onEquiposComplete = function(response){
+      $scope.equipos = response.data;
+      console.log($scope.equipos);
+    }
+
     dataService.getPaises(onPaisesComplete, onError);
     dataService.getCiudades(onCiudadesComplete, onError);
     dataService.getProvincias(onProvinciasComplete, onError);
+    dataService.getEquiposOptions(onEquiposComplete, onError);
 
     $scope.submitEquipoNuevoForm = function(){
       if($scope.equipo.fecha != undefined){

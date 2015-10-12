@@ -27,7 +27,7 @@ var dbLocal = {
 };
 
 var databaseConnect = function(){
-  connection = mysql.createConnection(dbLocal);
+  connection = mysql.createConnection(dbProd);
 
   connection.connect(function(err) {
       if(err) {

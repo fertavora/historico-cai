@@ -12,7 +12,6 @@ app.controller('PartidoNuevoCtrl',
     var onEquiposComplete = function(response){
       $scope.equipos = response.data;
       $scope.partido.equipo = $scope.equipos[0];
-      console.log($scope.equipos);
     }
 
     var onTorneosComplete = function(response){
