@@ -144,7 +144,6 @@ app.post('/node/guardar-torneo', function(req, res){
   });
 });
 
-
 app.post('/node/guardar-partido', function(req, res){
 //get max partidos_id and add 1
   connection.query("select max(partidos_id) as id from partidos;", function(err, rows, fields){
@@ -290,7 +289,7 @@ app.get('/node/torneos', function(req, res){
 //this is to get the equipos options for the <select>
 app.get('/node/equipos', function(req, res){
   // databaseConnect();
-  connection.query('SELECT * from equipos order by equipos_nombre asc', function(err, rows, fields) {
+  connection.query('SELECT * from equipos_detalle', function(err, rows, fields) {
     if (!err){
       res.status(200).send(rows);
 
