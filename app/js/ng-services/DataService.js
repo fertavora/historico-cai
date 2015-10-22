@@ -74,7 +74,16 @@ var urlPrefix = "http://"+$location.host() + ":" + $location.port();
     saveTecnico: function(response, error, data){
       $http.post(urlPrefix + "/node/guardar-tecnico", data)
         .then(response, error);
-    }
+    },
 
+    historialEquipo: function(response, error, data){
+      $http.post(urlPrefix + "/node/historial-equipo", data)
+        .then(response, error);
+    },
+
+    historialTorneo: function(response, error, data){
+      $http.post(urlPrefix + "/node/historial-torneo", data)
+        .then(response, error);
+    }
   }
 });

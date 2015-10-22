@@ -1,6 +1,13 @@
 'use strict';
 
 var app = angular.module('myApp', ['ngRoute'])
+  .directive('onLastRepeat', function() {
+        return function(scope, element, attrs) {
+            if (scope.$last) setTimeout(function(){
+                scope.$emit('onRepeatLast');
+            }, 1);
+        };
+  })
   .config(function($routeProvider){
     $routeProvider.when('/',
       {
@@ -26,10 +33,10 @@ var app = angular.module('myApp', ['ngRoute'])
         controller: 'TecnicosCtrl'
       });
 
-      $routeProvider.when('/equipos/',
-        {
-          templateUrl: 'templates/equipos.html',
-          controller: 'EquiposCtrl'
-        });
+    $routeProvider.when('/equipos/',
+      {
+        templateUrl: 'templates/equipos.html',
+        controller: 'EquiposCtrl'
+      });
 
   });

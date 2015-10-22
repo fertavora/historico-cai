@@ -57,6 +57,32 @@ app.get('/node/partidos/:id', function(req, res){
   res.status(200).send(req.params.id);
 });
 
+app.post('/node/historial-equipo', function(req, res){
+  var id = req.body.equipos_id;
+  connection.query("SELECT * FROM partidos_detalle WHERE equipos_id = ?", id, function(err, rows, fields) {
+    if (!err){
+      res.status(200).send(rows);
+
+    }else{
+      res.status(500).send('Error while performing Query.');
+
+    }
+  });
+});
+
+app.post('/node/historial-torneo', function(req, res){
+  var id = req.body.torneos_instancias_id;
+  connection.query("SELECT * FROM partidos_detalle WHERE torneos_instancias_id = ?", id, function(err, rows, fields) {
+    if (!err){
+      res.status(200).send(rows);
+
+    }else{
+      res.status(500).send('Error while performing Query.');
+
+    }
+  });
+});
+
 app.post('/node/guardar-torneoInstancia', function(req, res){
   // databaseConnect();
   connection.query("select max(torneos_instancias_id) as id from torneos_instancias;", function(err, rows, fields){
@@ -145,7 +171,6 @@ app.post('/node/guardar-torneo', function(req, res){
 });
 
 app.post('/node/guardar-partido', function(req, res){
-//get max partidos_id and add 1
   connection.query("select max(partidos_id) as id from partidos;", function(err, rows, fields){
     if (!err){
       var partidos_id = rows[0].id+1;

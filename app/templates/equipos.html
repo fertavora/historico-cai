@@ -77,13 +77,28 @@
         </div>
         <div class="panel-body">
           <table class="table table-striped">
-            <tr ng-repeat="e in equipos">
+            <tr ng-repeat="e in equipos" on-last-repeat>
               <td><img src="{{e.equipos_escudo}}" height="24" width="24"/> {{e.equipos_nombre}}</td>
               <td>{{e.ciudades_nombre}}</td>
               <td>{{e.paises_nombre}}</td>
+              <td><button type="button" ng-click="btnShowHistorial(e)" class="btnHistorial btn btn-primary btn-xs" data-toggle="modal" data-target="#historialModal" data-placement="top" title="Historial vs {{e.equipos_nombre}}"><i class="fa fa-history"></i></button></td>
             </tr>
           </table>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- historialModal -->
+<div class="modal fade" id="historialModal" tabindex="-1" role="dialog" aria-labelledby="historialModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="historialModalLabel">Historial</h4>
+      </div>
+      <div class="modal-body">
+        ...
       </div>
     </div>
   </div>

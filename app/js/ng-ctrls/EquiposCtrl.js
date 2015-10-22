@@ -5,6 +5,18 @@ app.controller('EquiposCtrl',
     $scope.showMessageEquipoOK = false;
     $scope.equipo = {};
     $scope.master = {};
+    $scope.partidosHistorial = {};
+    $scope.historialJugados = 0;
+    $scope.historialGanados = 0;
+    $scope.historialEmpatados = 0;
+    $scope.historialPerdidos = 0;
+    $scope.historialGolesFavor = 0;
+    $scope.historialGolesContra = 0;
+
+    //this event is triggered at the end of the methods table ng-repeat, see directive in app.js
+    $scope.$on('onRepeatLast', function(event){
+      $('.btnHistorial').tooltip();
+    });
 
     $('#eFechaFund').datepicker({
       language: "es",
@@ -49,7 +61,25 @@ app.controller('EquiposCtrl',
 
     var onEquiposComplete = function(response){
       $scope.equipos = response.data;
-      console.log($scope.equipos);
+    }
+
+    var onHistorialEquipo = function(response){
+      $scope.partidosHistorial = response.data;
+      angular.forEach($scope.partidosHistorial, function(item){
+        if(item.partidos_goles_cai > item.partidos_goles_rival){ $scope.historialGanados++ }
+        if(item.partidos_goles_cai == item.partidos_goles_rival){ $scope.historialEmpatados++ }
+        if(item.partidos_goles_cai < item.partidos_goles_rival){ $scope.historialPerdidos++ }
+        $scope.historialGolesFavor += item.partidos_goles_cai;
+        $scope.historialGolesContra += item.partidos_goles_rival;
+        $scope.historialJugados++;
+      });
+
+      console.log("Jugados: " + $scope.historialJugados);
+      console.log("Ganados: " + $scope.historialGanados);
+      console.log("Empatados: " + $scope.historialEmpatados);
+      console.log("Perdidos: " + $scope.historialPerdidos);
+      console.log("GolesFavor: " + $scope.historialGolesFavor);
+      console.log("GolesContra: " + $scope.historialGolesContra);
     }
 
     dataService.getPaises(onPaisesComplete, onError);
@@ -65,5 +95,19 @@ app.controller('EquiposCtrl',
       }
       dataService.saveEquipo(onEquipoGuardado, onError, $scope.equipo);
     };
+
+    $scope.btnShowHistorial = function(e){
+      //reset variables
+      $scope.partidosHistorial = {};
+      $scope.historialJugados = 0;
+      $scope.historialGanados = 0;
+      $scope.historialEmpatados = 0;
+      $scope.historialPerdidos = 0;
+      $scope.historialGolesFavor = 0;
+      $scope.historialGolesContra = 0;
+
+      var data = {equipos_id: e.equipos_id};
+      dataService.historialEquipo(onHistorialEquipo, onError, data);
+    }
 
   });
