@@ -73,19 +73,16 @@ app.controller('EquiposCtrl',
         $scope.historialGolesContra += item.partidos_goles_rival;
         $scope.historialJugados++;
       });
-
-      console.log("Jugados: " + $scope.historialJugados);
-      console.log("Ganados: " + $scope.historialGanados);
-      console.log("Empatados: " + $scope.historialEmpatados);
-      console.log("Perdidos: " + $scope.historialPerdidos);
-      console.log("GolesFavor: " + $scope.historialGolesFavor);
-      console.log("GolesContra: " + $scope.historialGolesContra);
     }
 
     dataService.getPaises(onPaisesComplete, onError);
     dataService.getCiudades(onCiudadesComplete, onError);
     dataService.getProvincias(onProvinciasComplete, onError);
     dataService.getEquiposOptions(onEquiposComplete, onError);
+
+    //this is to center content in historial table
+    $('#tableHistorial td').css("text-align", "center");
+    $('#tableHistorial tH').css("text-align", "center");
 
     $scope.submitEquipoNuevoForm = function(){
       if($scope.equipo.fecha != undefined){
@@ -105,7 +102,7 @@ app.controller('EquiposCtrl',
       $scope.historialPerdidos = 0;
       $scope.historialGolesFavor = 0;
       $scope.historialGolesContra = 0;
-
+      $('#historialModalLabel').append(" vs "+e.equipos_nombre);
       var data = {equipos_id: e.equipos_id};
       dataService.historialEquipo(onHistorialEquipo, onError, data);
     }

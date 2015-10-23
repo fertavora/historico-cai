@@ -98,7 +98,14 @@
         <h4 class="modal-title" id="historialModalLabel">Historial</h4>
       </div>
       <div class="modal-body">
-        ...
+        <table class="table table-striped" id="tableHistorial">
+          <thead>
+            <tr><th>J</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th>
+          </thead>
+          <tbody>
+            <tr><td>{{historialJugados}}</td><td>{{historialGanados}}</td><td>{{historialEmpatados}}</td><td>{{historialPerdidos}}</td><td>{{historialGolesFavor}}</td><td>{{historialGolesContra}}</td>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
