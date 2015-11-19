@@ -84,6 +84,11 @@ var urlPrefix = "http://"+$location.host() + ":" + $location.port();
     historialTorneo: function(response, error, data){
       $http.post(urlPrefix + "/node/historial-torneo", data)
         .then(response, error);
+    },
+
+    getTorneosTodos: function(response, error){
+      $http.get(urlPrefix + "/node/torneos-todos")
+          .then(response, error);
     }
   }
 });

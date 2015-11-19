@@ -299,7 +299,6 @@ app.get('/node/arbitros', function(req, res){
 
 //this is to get the torneos options for the <select>
 app.get('/node/torneos', function(req, res){
-  // databaseConnect();
   connection.query("SELECT torneos_instancias_id, torneos_instancias_nombre FROM torneos_instancias WHERE torneos_instancias_anio = year(now());", function(err, rows, fields) {
     if (!err){
       res.status(200).send(rows);
@@ -311,9 +310,22 @@ app.get('/node/torneos', function(req, res){
   });
 });
 
+//this is to get all the torneos_instancia
+app.get('/node/torneos-todos', function(req, res){
+  connection.query("SELECT * FROM torneos_instancias order by torneos_instancias_anio desc;", function(err, rows, fields) {
+    if (!err){
+      res.status(200).send(rows);
+
+    }else{
+      res.status(500).send('Error while performing Query.');
+
+    }
+  });
+});
+
+
 //this is to get the equipos options for the <select>
 app.get('/node/equipos', function(req, res){
-  // databaseConnect();
   connection.query('SELECT * from equipos_detalle', function(err, rows, fields) {
     if (!err){
       res.status(200).send(rows);
@@ -373,7 +385,6 @@ app.post('/node/guardar-tecnico', function(req, res){
 });
 
 app.post('/node/guardar-arbitro', function(req, res){
-    // databaseConnect();
     connection.query("select max(personas_id) as id from personas;", function(err, rows, fields){
       if(!err){
         var personas_id = rows[0].id+1;
@@ -411,8 +422,6 @@ app.post('/node/guardar-arbitro', function(req, res){
 
 //this is to get the partidos list for the home page>
 app.get('/node/partidos-home', function(req, res){
-  // databaseConnect();
-  // connection.connect();
   connection.query('SELECT * FROM partidos_detalle LIMIT 8;', function(err, rows, fields) {
     if (!err){
       res.status(200).send(rows);

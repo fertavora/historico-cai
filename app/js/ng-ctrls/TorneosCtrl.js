@@ -13,12 +13,19 @@ app.controller('TorneosCtrl',
       $scope.error = "Error!";
     };
 
-    var onTorneosComplete = function(response){
+    var onTorneosOptionsComplete = function(response){
       $scope.tipoTorneos = response.data;
       $scope.torneoInstancia.torneo = $scope.tipoTorneos[7];
     }
 
-    dataService.getTorneosOptions(onTorneosComplete, onError);
+    var onTorneosTodos = function(response){
+      $scope.torneosTodos = response.data;
+      console.log($scope.torneosTodos);
+    }
+
+    dataService.getTorneosOptions(onTorneosOptionsComplete, onError);
+
+    dataService.getTorneosTodos(onTorneosTodos, onError);
 
     $scope.submitTorneosInstanciaNuevoForm = function(){
       dataService.saveTorneoInstancia(onTorneoInstanciaGuardado, onError, $scope.torneoInstancia);
@@ -40,4 +47,9 @@ app.controller('TorneosCtrl',
       $scope.torneo.tipo = "N";
       $scope.showMessageTorneoOK = true;
     }
+
+    //this event is triggered at the end of the methods table ng-repeat, see directive in app.js
+    $scope.$on('onRepeatLast', function(event){
+      $('.btnHistorial').tooltip();
+    });
   });
