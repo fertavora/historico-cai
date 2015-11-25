@@ -20,7 +20,6 @@ app.controller('TorneosCtrl',
 
     var onTorneosTodos = function(response){
       $scope.torneosTodos = response.data;
-      console.log($scope.torneosTodos);
     }
 
     dataService.getTorneosOptions(onTorneosOptionsComplete, onError);
@@ -29,7 +28,6 @@ app.controller('TorneosCtrl',
 
     $scope.submitTorneosInstanciaNuevoForm = function(){
       dataService.saveTorneoInstancia(onTorneoInstanciaGuardado, onError, $scope.torneoInstancia);
-      // console.log($scope.torneoInstancia);
     }
 
     var onTorneoInstanciaGuardado = function(){
@@ -40,6 +38,32 @@ app.controller('TorneosCtrl',
 
     $scope.submitTorneoNuevoForm = function(){
       dataService.saveTorneo(onTorneoGuardado, onError, $scope.torneo);
+    }
+
+    $scope.btnShowHistorial = function(t){
+      //reset variables
+      $scope.partidosHistorial = {};
+      $scope.historialJugados = 0;
+      $scope.historialGanados = 0;
+      $scope.historialEmpatados = 0;
+      $scope.historialPerdidos = 0;
+      $scope.historialGolesFavor = 0;
+      $scope.historialGolesContra = 0;
+      $('#historialModalLabel').text("Historial de "+t.torneos_instancias_nombre);
+      var data = {torneos_instancias_id: t.torneos_instancias_id};
+      dataService.historialTorneo(onHistorialTorneo, onError, data);
+    }
+
+    var onHistorialTorneo = function(response){
+      $scope.partidosHistorial = response.data;
+      angular.forEach($scope.partidosHistorial, function(item){
+        if(item.partidos_goles_cai > item.partidos_goles_rival){ $scope.historialGanados++ }
+        if(item.partidos_goles_cai == item.partidos_goles_rival){ $scope.historialEmpatados++ }
+        if(item.partidos_goles_cai < item.partidos_goles_rival){ $scope.historialPerdidos++ }
+        $scope.historialGolesFavor += item.partidos_goles_cai;
+        $scope.historialGolesContra += item.partidos_goles_rival;
+        $scope.historialJugados++;
+      });
     }
 
     var onTorneoGuardado = function(){

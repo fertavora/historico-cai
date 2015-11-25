@@ -102,7 +102,7 @@ app.controller('EquiposCtrl',
       $scope.historialPerdidos = 0;
       $scope.historialGolesFavor = 0;
       $scope.historialGolesContra = 0;
-      $('#historialModalLabel').append(" vs "+e.equipos_nombre);
+      $('#historialModalLabel').text("Historial vs "+e.equipos_nombre);
       var data = {equipos_id: e.equipos_id};
       dataService.historialEquipo(onHistorialEquipo, onError, data);
     }

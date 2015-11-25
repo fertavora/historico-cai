@@ -58,13 +58,41 @@
           <h3 class="panel-title">Torneos</h3>
         </div>
         <div class="panel-body">
-          <table class="table table-striped">
-            <tr ng-repeat="t in torneosTodos" on-last-repeat>
-              <td>{{t.torneos_instancias_nombre}}</td>
-              <td><button type="button" ng-click="btnShowHistorial(t)" class="btnHistorial btn btn-primary btn-xs" data-toggle="modal" data-target="#historialModal" data-placement="top" title="Historial del {{t.torneos_instancias_nombre}}"><i class="fa fa-history"></i></button></td>
-            </tr>
-          </table>
+          <button type="button" ng-click="btnShowHistorial(t)" class="btnHistorial btn btn-primary btn-xs" data-toggle="modal" data-target="#historialModal" data-placement="top" title="Historial del {{t.torneos_instancias_nombre}}"><i class="fa fa-history"></i></button>
+          <select multiple class="form-control">
+            <option ng-repeat="t in torneosTodos" value="">{{t.torneos_instancias_nombre}}</option>
+          </select>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- historialModal -->
+<div class="modal fade" id="historialModal" tabindex="-1" role="dialog" aria-labelledby="historialModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="historialModalLabel">Historial</h4>
+      </div>
+      <div class="modal-body" style="max-height: 450px; overflow-y: auto;">
+        <table class="table table-striped" id="tableHistorial">
+          <thead>
+            <tr><th>J</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th>
+          </thead>
+          <tbody>
+            <tr><td>{{historialJugados}}</td><td>{{historialGanados}}</td><td>{{historialEmpatados}}</td><td>{{historialPerdidos}}</td><td>{{historialGolesFavor}}</td><td>{{historialGolesContra}}</td>
+          </tbody>
+        </table>
+        <table class="table table-striped">
+          <tr><th>Día</th><th>Resultado</th><th>Instancia</th></tr>
+          <tr ng-repeat="p in partidosHistorial" ng-switch on="p.partidos_condicion">
+            <td>{{p.partidos_dia | date: 'dd.MM.yyyy'}}</td>
+            <td ng-switch-default><img src="http://cdn.datafactory.la/escudos_ch/10.gif" height="24" width="24" alt="Independiente" title="Independiente"/> {{p.partidos_goles_cai}} - {{p.partidos_goles_rival}} <img src="{{p.equipos_escudo}}" height="24" width="24" alt="{{p.equipos_nombre}}" title="{{p.equipos_nombre}}"/></td>
+            <td ng-switch-when="V"><img src="{{p.equipos_escudo}}" height="24" width="24" alt="{{p.equipos_nombre}}" title="{{p.equipos_nombre}}"/> {{p.partidos_goles_rival}} - {{p.partidos_goles_cai}} <img src="http://cdn.datafactory.la/escudos_ch/10.gif" height="24" width="24" alt="Independiente" title="Independiente"/></td>
+            <td>{{p.partidos_instancia}}</td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>
