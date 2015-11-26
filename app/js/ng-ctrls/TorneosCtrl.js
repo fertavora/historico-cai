@@ -49,8 +49,8 @@ app.controller('TorneosCtrl',
       $scope.historialPerdidos = 0;
       $scope.historialGolesFavor = 0;
       $scope.historialGolesContra = 0;
-      $('#historialModalLabel').text("Historial de "+t.torneos_instancias_nombre);
-      var data = {torneos_instancias_id: t.torneos_instancias_id};
+      $('#historialModalLabel').text("Historial de "+$('#selectTorneos option:selected').text());
+      var data = {torneos_instancias_id: $('#selectTorneos option:selected').val()};
       dataService.historialTorneo(onHistorialTorneo, onError, data);
     }
 
