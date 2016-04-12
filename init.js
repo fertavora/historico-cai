@@ -23,18 +23,34 @@ var dbLocal = {
   host     : 'localhost',
   user     : 'root',
   password : 'Joaquin!01',
-  database : 'historicocai_dev'
+  database : 'historicocai'
 };
 
+if(process.argv[2]){
+  switch(process.argv[2]){
+    case "local":
+      var db = dbLocal;
+      break;
+    case "prod":
+      var db = dbProd;
+      break;
+    default:
+      var db = dbLocal;
+      break;
+  }
+}else{
+  var db = dbLocal;
+}
+
 var databaseConnect = function(){
-  connection = mysql.createConnection(dbProd);
+  connection = mysql.createConnection(db);
 
   connection.connect(function(err) {
       if(err) {
         console.log('error when connecting to db:', err);
         setTimeout(databaseConnect, 2000);
       }else{
-        console.log('db connected!');
+        console.log('db connected to '+db.host);
       }
     });
 
