@@ -19,8 +19,13 @@ app.factory('dataService', function($http, $location){
         },
     
         getCurrentTecnico: function(response, error){
-          $http.get(urlPrefix + "/node/tecnicos")
+          $http.get(urlPrefix + "/node/tecnico-activo")
               .then(response, error);
+        },
+
+        getAllTecnicos: function(response, error){
+            $http.get(urlPrefix + "/node/tecnicos")
+                .then(response, error);
         },
     
         savePartido: function(response, error, data){

@@ -6,6 +6,7 @@ app.controller('TecnicosCtrl',
     $scope.tecnico = {};
     $scope.master = {};
     $scope.tecnico.activo = 1;
+    $scope.tecnicos = [];
 
     $('#tNacimiento').datepicker({
       language: "es",
@@ -31,8 +32,12 @@ app.controller('TecnicosCtrl',
       $scope.tecnico.activo = 1;
       $scope.tecnico.fecha_nac = undefined;
     };
+    var onAllTecnicosComplete = function(response){
+      $scope.tecnicos = response.data;
+    }
 
     dataService.getPaises(onPaisesComplete, onError);
+    dataService.getAllTecnicos(onAllTecnicosComplete, onError);
 
     var onTecnicoGuardado = function(response){
       $scope.tecnico = angular.copy($scope.master);

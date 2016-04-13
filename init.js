@@ -21,11 +21,12 @@ var dbProd = {
 
 var dbLocal = {
   host     : 'localhost',
-  user     : 'root',
-  password : 'Joaquin!01',
+  user     : 'historicocai',
+  password : 'HistoCai!666',
   database : 'historicocai'
 };
 
+//gets the third argument if exists and selects the db
 if(process.argv[2]){
   switch(process.argv[2]){
     case "local":
@@ -80,7 +81,7 @@ app.post('/node/historial-equipo', function(req, res){
       res.status(200).send(rows);
 
     }else{
-      res.status(500).send('Error while performing Query.');
+      res.status(500).send(err);
 
     }
   });
@@ -93,7 +94,7 @@ app.post('/node/historial-torneo', function(req, res){
       res.status(200).send(rows);
 
     }else{
-      res.status(500).send('Error while performing Query.');
+      res.status(500).send(err);
 
     }
   });
@@ -118,11 +119,11 @@ app.post('/node/guardar-torneoInstancia', function(req, res){
         if(!err){
           res.json("{'status': 'ok'}");
         }else{
-          res.status(500).send('Error while performing Query.');
+          res.status(500).send(err);
         }
       });
     }else{
-        res.status(500).send('Error while performing Query.');
+        res.status(500).send(err);
     }
   });
 });
@@ -152,11 +153,11 @@ app.post('/node/guardar-equipo', function(req, res){
         if(!err){
           res.json("{'status': 'ok'}");
         }else{
-          res.status(500).send('Error while performing Query.');
+          res.status(500).send(err);
         }
       });
     }else{
-      res.status(500).send('Error while performing Query.');
+      res.status(500).send(err);
     }
   });
 });
@@ -177,11 +178,11 @@ app.post('/node/guardar-torneo', function(req, res){
         if(!err){
           res.json("{'status': 'ok'}");
         }else{
-          res.status(500).send('Error while performing Query.');
+          res.status(500).send(err);
         }
       });
     }else{
-        res.status(500).send('Error while performing Query.');
+        res.status(500).send(err);
     }
   });
 });
@@ -219,28 +220,38 @@ app.post('/node/guardar-partido', function(req, res){
         if(!err){
           res.json("{'status': 'ok'}");
         }else{
-          res.status(500).send('Error while performing Query.');
+          res.status(500).send(err);
         }
       });
 
     }else{
-        res.status(500).send('Error while performing Query.');
+        res.status(500).send(err);
     }
 
     });
 });
 
 
-//this is to get the tecnicos options for the <select>
-app.get('/node/tecnicos', function(req, res){
-  // databaseConnect();
+//this is to get the current tecnico
+app.get('/node/tecnico-activo', function(req, res){
   connection.query("SELECT p.personas_id, p.personas_nombre, p.personas_apellido from personas as p inner join tecnicos on p.personas_id = tecnicos.personas_id where tecnicos.tecnicos_activo = 1 order by p.personas_apellido asc;", function(err, rows, fields) {
     if (!err){
       res.status(200).send(rows);
 
     }else{
-      res.status(500).send('Error while performing Query.');
+      res.status(500).send(err);
 
+    }
+  });
+});
+
+//this is to get the list of tecnicos
+app.get('/node/tecnicos', function(req, res){
+  connection.query("SELECT p.* FROM personas as p inner join tecnicos on p.personas_id = tecnicos.personas_id;", function(err, rows, fields){
+    if(!err){
+      res.status(200).send(rows);
+    }else{
+      res.status(500).send(err);
     }
   });
 });
@@ -252,7 +263,7 @@ app.get('/node/provincias', function(req, res){
       res.status(200).send(rows);
 
     }else{
-      res.status(500).send('Error while performing Query.');
+      res.status(500).send(err);
 
     }
   });
@@ -265,7 +276,7 @@ app.get('/node/ciudades', function(req, res){
       res.status(200).send(rows);
 
     }else{
-      res.status(500).send('Error while performing Query.');
+      res.status(500).send(err);
 
     }
   });
@@ -278,7 +289,7 @@ app.get('/node/paises', function(req, res){
       res.status(200).send(rows);
 
     }else{
-      res.status(500).send('Error while performing Query.');
+      res.status(500).send(err);
 
     }
   });
@@ -293,7 +304,7 @@ app.get('/node/tipoTorneos', function(req, res){
       res.status(200).send(rows);
 
     }else{
-      res.status(500).send('Error while performing Query.');
+      res.status(500).send(err);
 
     }
   });
@@ -307,7 +318,7 @@ app.get('/node/arbitros', function(req, res){
       res.status(200).send(rows);
 
     }else{
-      res.status(500).send('Error while performing Query.');
+      res.status(500).send(err);
 
     }
   });
@@ -320,7 +331,7 @@ app.get('/node/torneos', function(req, res){
       res.status(200).send(rows);
 
     }else{
-      res.status(500).send('Error while performing Query.');
+      res.status(500).send(err);
 
     }
   });
@@ -333,7 +344,7 @@ app.get('/node/torneos-todos', function(req, res){
       res.status(200).send(rows);
 
     }else{
-      res.status(500).send('Error while performing Query.');
+      res.status(500).send(err);
 
     }
   });
@@ -347,7 +358,7 @@ app.get('/node/equipos', function(req, res){
       res.status(200).send(rows);
 
     }else{
-      res.status(500).send('Error while performing Query.');
+      res.status(500).send(err);
 
     }
   });
@@ -375,7 +386,7 @@ app.post('/node/guardar-tecnico', function(req, res){
           if(tecnicos_activo==1){
             connection.query("UPDATE tecnicos SET tecnicos_activo = 0;", function(err, result){
               if(err){
-                res.status(500).send('Error while performing Query.');
+                res.status(500).send(err);
               }
             });
           }
@@ -386,15 +397,15 @@ app.post('/node/guardar-tecnico', function(req, res){
             if(!err){
               res.json("{'status': 'ok'}");
             }else{
-              res.status(500).send('Error while performing Query.');
+              res.status(500).send(err);
             }
           });
         }else{
-          res.status(500).send('Error while performing Query.');
+          res.status(500).send(err);
         }
       });
     }else{
-      res.status(500).send('Error while performing Query.');
+      res.status(500).send(err);
     }
   });
 
@@ -423,15 +434,15 @@ app.post('/node/guardar-arbitro', function(req, res){
               if(!err){
                 res.json("{'status': 'ok'}");
               }else{
-                res.status(500).send('Error while performing Query.');
+                res.status(500).send(err);
               }
             });
           }else{
-            res.status(500).send('Error while performing Query.');
+            res.status(500).send(err);
           }
         });
       }else{
-        res.status(500).send('Error while performing Query.');
+        res.status(500).send(err);
       }
     });
 });
