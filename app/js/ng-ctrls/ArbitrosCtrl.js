@@ -22,8 +22,13 @@ app.controller('ArbitrosCtrl',
         $scope.arbitro.pais = $scope.paises[1];
       };
 
+      var onArbitrosComplete = function (response){
+        $scope.arbitros = response.data;
+      };
+      
       dataService.getPaises(onPaisesComplete, onError);
-
+      dataService.getArbitrosOptions(onArbitrosComplete, onError);
+      
       var onArbitroGuardado = function(response){
         $scope.arbitro = angular.copy($scope.master);
         $scope.arbitro.pais = $scope.paises[1];

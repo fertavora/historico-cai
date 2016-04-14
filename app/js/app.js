@@ -23,13 +23,13 @@ var app = angular.module('myApp', ['ngRoute'])
 
     $routeProvider.when('/arbitros/',
       {
-        templateUrl: 'templates/arbitros.html',
+        templateUrl: 'templates/arbitros/arbitros.html',
         controller: 'ArbitrosCtrl'
       });
 
     $routeProvider.when('/tecnicos/',
       {
-        templateUrl: 'templates/tecnicos.html',
+        templateUrl: 'templates/tecnicos/tecnicos.html',
         controller: 'TecnicosCtrl'
       });
 

@@ -8,7 +8,7 @@ app.directive('listadoTecnicos', function(){
     return{
         restrict: 'E',
         replace: true,
-        templateUrl: '/templates/listado-tecnicos.html'
+        templateUrl: '/templates/tecnicos/listado-tecnicos.html'
     }
 });
 
@@ -16,6 +16,6 @@ app.directive('formTecnico', function(){
    return {
        restrict: 'E',
        replace: true,
-       templateUrl: '/templates/form-tecnico.html'
+       templateUrl: '/templates/tecnicos/form-tecnico.html'
    } 
 });
