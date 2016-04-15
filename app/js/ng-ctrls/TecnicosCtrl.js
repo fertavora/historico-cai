@@ -1,7 +1,7 @@
 'use strict';
 
 app.controller('TecnicosCtrl',
-  function TecnicosCtrl($scope, dataService){
+  function TecnicosCtrl($scope, dataService, $interval){
     $scope.showMessageOK = false;
     $scope.tecnico = {};
     $scope.master = {};
@@ -36,22 +36,41 @@ app.controller('TecnicosCtrl',
       $scope.tecnicos = response.data;
     }
 
+      $scope.$on('refreshTecnicos', function(event){
+          dataService.getAllTecnicos(onAllTecnicosComplete, onError);
+      });
+
     dataService.getPaises(onPaisesComplete, onError);
     dataService.getAllTecnicos(onAllTecnicosComplete, onError);
+
+      $scope.resetForm = function(tecnicoNuevo) {
+          if (tecnicoNuevo) {
+              tecnicoNuevo.$setPristine();
+              tecnicoNuevo.$setUntouched();
+          }
+          $scope.tecnico = angular.copy($scope.master);
+          $scope.tecnico.pais = $scope.paises[1];
+          $scope.tecnico.activo = 1;
+      };
 
     var onTecnicoGuardado = function(response){
       $scope.tecnico = angular.copy($scope.master);
       $scope.tecnico.pais = $scope.paises[1];
       $scope.showMessageOK = true;
+        $scope.resetForm($scope.tecnicoNuevo);
+        $scope.$emit('refreshTecnicos');
+      $interval(function(){ $scope.showMessageOK = false; }, 3000);
+
     }
 
-    $scope.submitTecnicoForm = function(){
-      // console.log($scope.tecnico);
-      if($scope.tecnico.fecha_nac != undefined){
-        $scope.tecnico.fecha_nac = getDateDBFormat($scope.tecnico.fecha_nac);
-      }else{
-        $scope.tecnico.fecha_nac = null;
+    $scope.submitTecnicoForm = function(t, tecnicoNuevo){
+      if(tecnicoNuevo.$valid){
+          if($scope.tecnico.fecha_nac != undefined){
+              $scope.tecnico.fecha_nac = getDateDBFormat($scope.tecnico.fecha_nac);
+          }else{
+              $scope.tecnico.fecha_nac = null;
+          }
+          dataService.saveTecnico(onTecnicoGuardado, onError, $scope.tecnico);
       }
-      dataService.saveTecnico(onTecnicoGuardado, onError, $scope.tecnico);
     }
   });

@@ -6,7 +6,8 @@
   "dependencies": {
     "express": "^4.13.3",
     "loopback-connector-mongodb": "^1.13.0",
-    "mongodb": "^2.0.42"
+    "mongodb": "^2.0.42",
+    "selenium-webdriver": "^2.53.1"
   },
   "devDependencies": {},
   "scripts": {

@@ -1,9 +1,10 @@
 'use strict';
 
 app.controller('PartidoNuevoCtrl',
-  function PartidoNuevoCtrl($scope, dataService, $filter, $http){
+  function PartidoNuevoCtrl($scope, dataService, $interval){
     $scope.master = {};
     $scope.showMessageOK = false;
+    $scope.partido = {};
 
     var onError = function(reason){
       $scope.error = "Error!";
@@ -49,10 +50,27 @@ app.controller('PartidoNuevoCtrl',
       todayHighlight: true
     });
 
-    $scope.submitPartidoNuevoForm = function(){
-      $scope.showMessageOK = false; //to hide message if submited before
-      $scope.partido.dia = getDateDBFormat($scope.partido.dia);
-      dataService.savePartido(onPartidoGuardado, onError, $scope.partido);
+    $scope.resetForm = function(formPartidoNuevo){
+        if(formPartidoNuevo){
+            formPartidoNuevo.$setPristine();
+            formPartidoNuevo.$setUntouched();
+        }
+        $scope.partido = angular.copy($scope.master);
+        $scope.partido.equipo = $scope.equipos[0];
+        $scope.partido.torneo = $scope.torneos[0];
+        $scope.partido.arbitro = $scope.arbitros[0];
+        $scope.partido.tecnico = $scope.tecnicos[0];
+        $scope.partido.golescai = 0;
+        $scope.partido.golesrival = 0;
+        $scope.partido.condicion = 'L';
+    }
+
+    $scope.submitPartidoNuevoForm = function(p, formPartidoNuevo){
+        if(formPartidoNuevo.$valid){
+            $scope.showMessageOK = false; //to hide message if submited before
+            p.dia = getDateDBFormat(p.dia);
+            dataService.savePartido(onPartidoGuardado, onError, p);
+        }
     };
 
     var onPartidoGuardado = function(response){
@@ -66,6 +84,7 @@ app.controller('PartidoNuevoCtrl',
       $scope.partido.golescai=0;
       $scope.partido.golesrival=0;
       $scope.$emit('refreshPartidos');
-      setTimeout(function(){ $scope.showMessageOK = false; }, 3000);
+      $scope.resetForm($scope.formPartidoNuevo);
+      $interval(function(){ $scope.showMessageOK = false; }, 3000);
     }
   });

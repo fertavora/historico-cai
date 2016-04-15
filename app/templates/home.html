@@ -26,11 +26,16 @@
           <h3 class="panel-title">Partido Nuevo</h3>
         </div>
         <div class="panel-body">
-          <form name="formPartidoNuevo">
+          <form role="form" name="formPartidoNuevo" id="formPartidoNuevo" ng-submit="submitPartidoNuevoForm(partido, formPartidoNuevo)" novalidate>
             <div class="row">
-                <div class="form-group col-lg-6">
-                  <label for="diaPartido">Fecha</label>
+                <div class="form-group col-lg-6 has-feedback" ng-class="{'has-error' : formPartidoNuevo.diaPartido.$error.required && (formPartidoNuevo.$submitted || formPartidoNuevo.diaPartido.$touched)}">
+                  <label for="diaPartido" class="control-label">Fecha</label>
                   <input type="text" class="form-control" id="diaPartido" name="diaPartido" ng-model="partido.dia" required>
+                  <div ng-show="formPartidoNuevo.$submitted || formPartidoNuevo.diaPartido.$touched">
+                    <div ng-show="formPartidoNuevo.diaPartido.$error.required">
+                      <span class="text-danger">Ingrese una fecha</span>
+                    </div>
+                  </div>
                 </div>
                 <div class="form-group col-lg-6">
                   <label for="equipoPartido">Equipo</label>
@@ -42,9 +47,14 @@
                   <label for="torneoPartido">Torneo</label>
                   <select class="form-control" id="torneoPartido" ng-model="partido.torneo" ng-options="t.torneos_instancias_nombre for t in torneos"></select>
                 </div>
-              <div class="form-group col-lg-6">
-                <label for="instanciaPartido">Instancia</label>
-                <input type="text" class="form-control" id="instanciaPartido" ng-model="partido.instancia" ng-required=true>
+              <div class="form-group col-lg-6 has-feedback" ng-class="{'has-error' : formPartidoNuevo.instanciaPartido.$error.required && (formPartidoNuevo.$submitted || formPartidoNuevo.instanciaPartido.$touched)}">
+                <label for="instanciaPartido" class="control-label">Instancia</label>
+                <input type="text" class="form-control" name="instanciaPartido" id="instanciaPartido" ng-model="partido.instancia" required>
+                <div ng-show="formPartidoNuevo.$submitted || formPartidoNuevo.instanciaPartido.$touched">
+                  <div ng-show="formPartidoNuevo.instanciaPartido.$error.required">
+                    <span class="text-danger">Ingrese una instancia (01, Octavos, etc.)</span>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="row">
@@ -93,7 +103,7 @@
               </div>
               <div class="form-group col-lg-6">
                 <label>&nbsp;</label>
-                <button type="submit" class="btn btn-default" ng-click="submitPartidoNuevoForm()">Guardar</button>
+                <button id="btnGuardar" type="submit" class="btn btn-default">Guardar</button>
                 <span class="text-success" ng-show="showMessageOK"><strong>Partido Guardado!</strong></span>
               </div>
             </div>

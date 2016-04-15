@@ -6,7 +6,7 @@
         <div class="panel-body">
             <table class="table table-striped">
                 <tr><th>Nombre</th><th>Apellido</th><th>&nbsp;</th></tr>
-                <tr ng-repeat="t in tecnicos">
+                <tr ng-repeat="t in tecnicos | orderBy: 'personas_apellido'">
                     <td>{{t.personas_nombre}}</td>
                     <td>{{t.personas_apellido}}</td>
                     <td>&nbsp;</td>

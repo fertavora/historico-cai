@@ -35,7 +35,7 @@ var app = angular.module('myApp', ['ngRoute'])
 
     $routeProvider.when('/equipos/',
       {
-        templateUrl: 'templates/equipos.html',
+        templateUrl: 'templates/equipos/equipos.html',
         controller: 'EquiposCtrl'
       });
 
