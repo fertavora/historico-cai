@@ -9,6 +9,7 @@ This files runs the 'server' that hosts the nodejs app.
 var express = require('express');
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
+var logger = require('./logger');
 var app = express();
 var connection;
 
@@ -48,17 +49,17 @@ var databaseConnect = function(){
 
   connection.connect(function(err) {
       if(err) {
-        console.log('error when connecting to db:', err);
+        logger.error('error when connecting to db:', err);
         setTimeout(databaseConnect, 2000);
       }else{
-        console.log('db connected to '+db.host);
+        logger.info('db connected to '+db.host);
       }
     });
 
   connection.on('error', function(err) {
-      console.log('db error', err);
+      logger.error('db error', err);
       if(err.code === 'PROTOCOL_CONNECTION_LOST') {
-        console.log('reconnecting...');
+        logger.info('reconnecting...');
         databaseConnect();
       } else {
         throw err;
@@ -101,7 +102,6 @@ app.post('/node/historial-torneo', function(req, res){
 });
 
 app.post('/node/guardar-torneoInstancia', function(req, res){
-  // databaseConnect();
   connection.query("select max(torneos_instancias_id) as id from torneos_instancias;", function(err, rows, fields){
     if (!err){
       var torneos_instancias_id = rows[0].id+1;
@@ -163,7 +163,6 @@ app.post('/node/guardar-equipo', function(req, res){
 });
 
 app.post('/node/guardar-torneo', function(req, res){
-  // databaseConnect();
   connection.query("select max(torneos_id) as id from torneos;", function(err, rows, fields){
     if (!err){
       var torneos_id = rows[0].id+1;
@@ -257,7 +256,6 @@ app.get('/node/tecnicos', function(req, res){
 });
 
 app.get('/node/provincias', function(req, res){
-  // databaseConnect();
   connection.query("SELECT * from provincias order by provincia_nombre;", function(err, rows, fields) {
     if (!err){
       res.status(200).send(rows);
@@ -270,7 +268,6 @@ app.get('/node/provincias', function(req, res){
 });
 
 app.get('/node/ciudades', function(req, res){
-  // databaseConnect();
   connection.query("SELECT * from ciudades order by ciudades_nombre;", function(err, rows, fields) {
     if (!err){
       res.status(200).send(rows);
@@ -283,7 +280,6 @@ app.get('/node/ciudades', function(req, res){
 });
 
 app.get('/node/paises', function(req, res){
-  // databaseConnect();
   connection.query("SELECT * from paises order by paises_nombre;", function(err, rows, fields) {
     if (!err){
       res.status(200).send(rows);
@@ -297,8 +293,6 @@ app.get('/node/paises', function(req, res){
 
 //this is to get the torneos options for the <select>
 app.get('/node/tipoTorneos', function(req, res){
-  // databaseConnect();
-  // connection.connect();
   connection.query("SELECT * FROM torneos ORDER BY torneos.torneos_nombre ASC;", function(err, rows, fields) {
     if (!err){
       res.status(200).send(rows);
@@ -312,7 +306,6 @@ app.get('/node/tipoTorneos', function(req, res){
 
 //this is to get the arbitros options for the <select>
 app.get('/node/arbitros', function(req, res){
-  // databaseConnect();
   connection.query("SELECT p.personas_id, p.personas_nombre, p.personas_apellido FROM personas as p INNER JOIN arbitros on p.personas_id = arbitros.personas_id ORDER BY p.personas_apellido ASC;", function(err, rows, fields) {
     if (!err){
       res.status(200).send(rows);
