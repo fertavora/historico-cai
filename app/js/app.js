@@ -17,7 +17,7 @@ var app = angular.module('myApp', ['ngRoute'])
 
     $routeProvider.when('/torneos/',
       {
-        templateUrl: 'templates/torneos.html',
+        templateUrl: 'templates/torneos/torneos.html',
         controller: 'TorneosCtrl'
       });
 
