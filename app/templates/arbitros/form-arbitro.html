@@ -6,20 +6,20 @@
         <div class="panel-body">
             <form name="arbitroNuevo">
                 <div class="form-group">
-                    <label for="tiNombre">Nombre</label>
+                    <label for="aNombre">Nombre</label>
                     <input type="text" class="form-control" id="aNombre" ng-model="arbitro.nombre" required>
                 </div>
                 <div class="form-group">
-                    <label for="tiNombre">Apellido</label>
-                    <input type="text" class="form-control" id="aNombre" ng-model="arbitro.apellido" required>
+                    <label for="aApellido">Apellido</label>
+                    <input type="text" class="form-control" id="aApellido" ng-model="arbitro.apellido" required>
                 </div>
                 <div class="form-group">
-                    <label for="tiNombre">Nacionalidad</label>
+                    <label for="aPais">Nacionalidad</label>
                     <select class="form-control" id="aPais" ng-model="arbitro.pais" ng-options="p.paises_nombre for p in paises">
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="tiNombre">Fecha Nacimiento</label>
+                    <label for="aNacimiento">Fecha Nacimiento</label>
                     <input type="text" class="form-control" id="aNacimiento" ng-model="arbitro.fecha_nac">
                 </div>
                 <button type="submit" class="btn btn-default" ng-click="submitArbitroForm()">Guardar</button>

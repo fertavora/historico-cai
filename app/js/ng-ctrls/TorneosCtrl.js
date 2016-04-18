@@ -41,7 +41,8 @@ app.controller('TorneosCtrl',
     }
 
     $scope.btnShowHistorial = function(t){
-      //reset variables
+      console.log(t);
+        //reset variables
       $scope.partidosHistorial = {};
       $scope.historialJugados = 0;
       $scope.historialGanados = 0;
@@ -50,7 +51,7 @@ app.controller('TorneosCtrl',
       $scope.historialGolesFavor = 0;
       $scope.historialGolesContra = 0;
       $('#historialModalLabel').text("Historial de "+$('#selectTorneos option:selected').text());
-      var data = {torneos_instancias_id: $('#selectTorneos option:selected').val()};
+      var data = {torneos_instancias_id: t.torneos_instancias_id};
       dataService.historialTorneo(onHistorialTorneo, onError, data);
     }
 

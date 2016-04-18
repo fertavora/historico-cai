@@ -1,0 +1,12 @@
+<div class="col-lg-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Torneos</h3>
+        </div>
+        <div style="overflow: auto; height: 500px;">
+            <table class="table table-hover">
+                <tr ng-repeat="t in torneosTodos"><td>{{t.torneos_instancias_nombre}}</td><td><button type="button" ng-click="btnShowHistorial(t) " class="btnHistorial btn btn-primary btn-xs" data-toggle="modal" data-target="#historialModal" data-placement="top" title="Historial del {{t.torneos_instancias_nombre}}">Ver historial <i class="fa fa-history"></i></button></td></tr>
+            </table>
+        </div>
+    </div>
+</div>
