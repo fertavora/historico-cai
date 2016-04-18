@@ -3,13 +3,14 @@
         <div class="panel-heading">
             <h3 class="panel-title">Árbitros</h3>
         </div>
-        <table class="table table-striped">
-            <tr><th>Nombre</th><th>Apellido</th><th>&nbsp;</th></tr>
-            <tr ng-repeat="a in arbitros">
-                <td>{{a.personas_nombre}}</td>
-                <td>{{a.personas_apellido}}</td>
-                <td>&nbsp;</td>
-            </tr>
-        </table>
+        <div style="overflow: auto; height: 518px">
+            <table class="table table-striped">
+                <tr ng-repeat="a in arbitros">
+                    <td>{{a.personas_nombre}}</td>
+                    <td>{{a.personas_apellido}}</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>

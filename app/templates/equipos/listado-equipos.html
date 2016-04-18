@@ -3,13 +3,15 @@
         <div class="panel-heading">
             <h3 class="panel-title">Equipos</h3>
         </div>
-        <table class="table table-striped">
-            <tr ng-repeat="e in equipos" on-last-repeat>
-                <td><img src="{{e.equipos_escudo}}" height="24" width="24"/> {{e.equipos_nombre}}</td>
-                <td>{{e.ciudades_nombre}}</td>
-                <td>{{e.paises_nombre}}</td>
-                <td><button type="button" ng-click="btnShowHistorial(e)" class="btnHistorial btn btn-primary btn-xs" data-toggle="modal" data-target="#historialModal" data-placement="top" title="Historial vs {{e.equipos_nombre}}"><i class="fa fa-history"></i></button></td>
-            </tr>
-        </table>
+        <div style="overflow: auto; height: 492px">
+            <table class="table table-striped">
+                <tr ng-repeat="e in equipos" on-last-repeat>
+                    <td><img src="{{e.equipos_escudo}}" height="24" width="24"/> {{e.equipos_nombre}}</td>
+                    <td>{{e.ciudades_nombre}}</td>
+                    <td>{{e.paises_nombre}}</td>
+                    <td><button type="button" ng-click="btnShowHistorial(e)" class="btnHistorial btn btn-primary btn-xs" data-toggle="modal" data-target="#historialModal" data-placement="top" title="Historial vs {{e.equipos_nombre}}"><i class="fa fa-history"></i></button></td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>
