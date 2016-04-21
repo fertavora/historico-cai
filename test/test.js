@@ -13,14 +13,25 @@ var browser = new webdriver.Builder()
 
 var testUrl = 'http://localhost:3000/';
 
-var homePage = {
-    btnGuardar: function(d,b){
-        return d.findElement(b.id('btnGuardar'));
-    }
-};
+var homePage = require('./homePage');
+homePage.browser = browser;
+homePage.by = By;
+
+// var homePage = {
+//     btnGuardar: function(d,b){
+//         return d.findElement(b.id('btnGuardar'));
+//     }
+// };
 
 browser.manage().window().maximize();
 browser.get(testUrl);
-homePage.btnGuardar(browser, By).click();
+browser.findElement(By.id('diaPartido')).sendKeys("01/04/2016");
+browser.findElement(By.id('instanciaPartido')).sendKeys("01");
+browser.findElement(By.id('btnGuardar')).click();
+browser.wait(until.elementIsVisible(browser.findElement(By.id('guardadoOK')))).then(function(e){
+    console.log(e.value);
+});
+
+// homePage.btnGuardar().click();
 
 // browser.findElement(By.id('btnGuardar')).click();

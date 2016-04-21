@@ -18,4 +18,8 @@ app.controller('HomeCtrl',
     });
 
     dataService.getPartidosHome(onPartidosComplete, onError);
+
+    $scope.btnShowDetalle = function(p){
+        console.log(p);
+    }
   });

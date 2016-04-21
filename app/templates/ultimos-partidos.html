@@ -4,13 +4,14 @@
             <h3 class="panel-title">Últimos ocho partidos</h3>
         </div>
         <table class="table table-striped">
-            <tr><th>Día</th><th>Resultado</th><th>Torneo</th><th>Instancia</th></tr>
+            <tr><th>Día</th><th>Resultado</th><th>Torneo</th><th>Instancia</th><th>&nbsp;</th></tr>
             <tr ng-repeat="p in partidos" ng-switch on="p.partidos_condicion">
                 <td>{{p.partidos_dia | date: 'dd.MM.yyyy'}}</td>
                 <td ng-switch-default><img src="http://cdn.datafactory.la/escudos_ch/10.gif" height="24" width="24" alt="Independiente" title="Independiente"/> {{p.partidos_goles_cai}} - {{p.partidos_goles_rival}} <img src="{{p.equipos_escudo}}" height="24" width="24" alt="{{p.equipos_nombre}}" title="{{p.equipos_nombre}}"/></td>
                 <td ng-switch-when="V"><img src="{{p.equipos_escudo}}" height="24" width="24" alt="{{p.equipos_nombre}}" title="{{p.equipos_nombre}}"/> {{p.partidos_goles_rival}} - {{p.partidos_goles_cai}} <img src="http://cdn.datafactory.la/escudos_ch/10.gif" height="24" width="24" alt="Independiente" title="Independiente"/></td>
                 <td>{{p.torneos_instancias_nombre}}</td>
                 <td>{{p.partidos_instancia}}</td>
+                <td><button type="button" ng-click="btnShowDetalle(p)" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#detalleModal" data-placement="top"><i class="fa fa-file-text"></i></button></td>
             </tr>
         </table>
     </div>
