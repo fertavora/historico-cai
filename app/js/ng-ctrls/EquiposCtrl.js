@@ -3,6 +3,7 @@
 app.controller('EquiposCtrl',
   function EquiposCtrl($scope, dataService){
     $scope.showMessageEquipoOK = false;
+    $scope.showHistorialPanel = false;
     $scope.equipo = {};
     $scope.master = {};
     $scope.partidosHistorial = {};
@@ -102,9 +103,14 @@ app.controller('EquiposCtrl',
       $scope.historialPerdidos = 0;
       $scope.historialGolesFavor = 0;
       $scope.historialGolesContra = 0;
-      $('#historialModalLabel').text("Historial vs "+e.equipos_nombre);
+      $scope.historialTitle = "Historial vs "+e.equipos_nombre;
       var data = {equipos_id: e.equipos_id};
       dataService.historialEquipo(onHistorialEquipo, onError, data);
+      $scope.showHistorialPanel = true;
     }
+      
+      $scope.btnCloseHistorial = function(){
+        $scope.showHistorialPanel = false;
+      }
 
   });

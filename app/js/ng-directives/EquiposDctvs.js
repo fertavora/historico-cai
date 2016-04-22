@@ -11,14 +11,13 @@ app.directive('formEquipo', function(){
     }
 });
 
-// EL MODAL EN DIRECTIVE NO ANDA, APARENTEMENTE PROBLEMA ENTRE JQUERY Y ANGULARJS
-// app.directive('historialEquipo', function(){
-//     return {
-//         restrict: 'E',
-//         replace: true,
-//         templateUrl: 'templates/equipos/historial-equipo.html'
-//     }
-// });
+app.directive('historialEquipo', function(){
+    return {
+        restrict: 'E',
+        replace: true,
+        templateUrl: 'templates/equipos/historial-equipo.html',
+    }
+});
 
 app.directive('listadoEquipos', function(){
     return {
