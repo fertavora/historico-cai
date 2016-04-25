@@ -4,6 +4,8 @@ app.controller('HomeCtrl',
   function HomeCtrl($scope, dataService, $locale){
     $locale.id = "es-AR";
 
+    $scope.limits = [{value: '10'},{value: '20'},{value: '30'}];
+    $scope.limitPartidos = $scope.limits[0];
     var onPartidosComplete = function(response){
       $scope.partidos = response.data;
     }

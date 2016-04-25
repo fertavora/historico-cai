@@ -442,7 +442,7 @@ app.post('/node/guardar-arbitro', function(req, res){
 
 //this is to get the partidos list for the home page>
 app.get('/node/partidos-home', function(req, res){
-  connection.query('SELECT * FROM partidos_detalle LIMIT 8;', function(err, rows, fields) {
+  connection.query('SELECT * FROM partidos_detalle LIMIT 30;', function(err, rows, fields) {
     if (!err){
       res.status(200).send(rows);
 

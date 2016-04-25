@@ -1,11 +1,14 @@
 <div class="col-lg-6">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Últimos ocho partidos</h3>
+            <h3 class="panel-title">Últimos
+            <select name="limit" ng-model="limitPartidos" ng-options="limits.value for limits in limits"></select>
+                partidos
+            </h3>
         </div>
         <table class="table table-striped">
             <tr><th>Día</th><th>Resultado</th><th>Torneo</th><th>Instancia</th><th>&nbsp;</th></tr>
-            <tr ng-repeat="p in partidos" ng-switch on="p.partidos_condicion">
+            <tr ng-repeat="p in partidos | limitTo: limitPartidos.value" ng-switch on="p.partidos_condicion">
                 <td>{{p.partidos_dia | date: 'dd.MM.yyyy'}}</td>
                 <td ng-switch-default><img src="http://cdn.datafactory.la/escudos_ch/10.gif" height="24" width="24" alt="Independiente" title="Independiente"/> {{p.partidos_goles_cai}} - {{p.partidos_goles_rival}} <img src="{{p.equipos_escudo}}" height="24" width="24" alt="{{p.equipos_nombre}}" title="{{p.equipos_nombre}}"/></td>
                 <td ng-switch-when="V"><img src="{{p.equipos_escudo}}" height="24" width="24" alt="{{p.equipos_nombre}}" title="{{p.equipos_nombre}}"/> {{p.partidos_goles_rival}} - {{p.partidos_goles_cai}} <img src="http://cdn.datafactory.la/escudos_ch/10.gif" height="24" width="24" alt="Independiente" title="Independiente"/></td>
