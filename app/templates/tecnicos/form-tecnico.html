@@ -4,9 +4,9 @@
             <h3 class="panel-title">Técnico nuevo</h3>
         </div>
         <div class="panel-body">
-            <form role="form" name="tecnicoNuevo" ng-submit="submitTecnicoForm(tecnico, tecnicoNuevo)" novalidate>
+            <form role="form" name="tecnicoNuevo" ng-submit="submitTecnicoForm(tecnicoNuevo)" novalidate>
                 <div class="form-group has-feedback" ng-class="{'has-error':tecnicoNuevo.tNombre.$error.required && (tecnicoNuevo.$submitted || tecnicoNuevo.tNombre.$touched)}">
-                    <label for="tNombre">Nombre</label>
+                    <label class="control-label" for="tNombre">Nombre</label>
                     <input type="text" class="form-control" name="tNombre" id="tNombre" ng-model="tecnico.nombre" required>
                     <div ng-show="tecnicoNuevo.$submitted || tecnicoNuevo.tNombre.$touched">
                         <div ng-show="tecnicoNuevo.tNombre.$error.required">
@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="form-group has-feedback" ng-class="{'has-error':tecnicoNuevo.tApellido.$error.required && (tecnicoNuevo.$submitted || tecnicoNuevo.tApellido.$touched)}">
-                    <label for="tApellido">Apellido</label>
+                    <label class="control-label" for="tApellido">Apellido</label>
                     <input type="text" class="form-control" id="tApellido" name="tApellido" ng-model="tecnico.apellido" required>
                     <div ng-show="tecnicoNuevo.$submitted || tecnicoNuevo.tApellido.$touched">
                         <div ng-show="tecnicoNuevo.tApellido.$error.required">
@@ -24,17 +24,17 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="tPais">Nacionalidad</label>
+                    <label class="control-label" for="tPais">Nacionalidad</label>
                     <select class="form-control" id="tPais" ng-model="tecnico.pais" ng-options="p.paises_nombre for p in paises">
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="tNacimiento">Fecha Nacimiento</label>
+                    <label class="control-label" for="tNacimiento">Fecha Nacimiento</label>
                     <input type="text" class="form-control" id="tNacimiento" ng-model="tecnico.fecha_nac">
                 </div>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" ng-model="tecnico.activo" ng-true-value="1" ng-false-value="0" ng-init="tecnico.activo=1"> Activo
+                        <input class="control-label" type="checkbox" ng-model="tecnico.activo" ng-true-value="1" ng-false-value="0" ng-init="tecnico.activo=1"> Activo
                     </label>
                 </div>
                 <button type="submit" class="btn btn-default">Guardar</button>

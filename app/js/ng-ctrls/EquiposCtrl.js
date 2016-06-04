@@ -1,7 +1,7 @@
 'use strict';
 
 app.controller('EquiposCtrl',
-  function EquiposCtrl($scope, dataService){
+  function EquiposCtrl($scope, dataService, $interval, $filter){
     $scope.showMessageEquipoOK = false;
     $scope.showHistorialPanel = false;
     $scope.equipo = {};
@@ -58,10 +58,12 @@ app.controller('EquiposCtrl',
       $scope.equipo.pais = $scope.paises[1];
       $scope.equipo.provincia = $scope.provincias[4];
       $scope.showMessageEquipoOK = true;
+      $interval(function(){ $scope.showMessageEquipoOK = false; }, 3000);
     };
 
     var onEquiposComplete = function(response){
-      $scope.equipos = response.data;
+      $scope.equipos = $filter('orderBy')(response.data, 'equipos_nombre');
+      // $scope.equipos = response.data;
     }
 
     var onHistorialEquipo = function(response){
@@ -85,13 +87,16 @@ app.controller('EquiposCtrl',
     $('#tableHistorial td').css("text-align", "center");
     $('#tableHistorial tH').css("text-align", "center");
 
-    $scope.submitEquipoNuevoForm = function(){
-      if($scope.equipo.fecha != undefined){
-        $scope.equipo.fecha = getDateDBFormat($scope.equipo.fecha);
-      }else{
-        $scope.equipo.fecha = null;
+    $scope.submitEquipoNuevoForm = function(nuevoEquipo){
+      if(nuevoEquipo.$valid){
+        if($scope.equipo.fecha != undefined){
+          $scope.equipo.fecha = getDateDBFormat($scope.equipo.fecha);
+        }else{
+          $scope.equipo.fecha = null;
+        }
+        dataService.saveEquipo(onEquipoGuardado, onError, $scope.equipo);
       }
-      dataService.saveEquipo(onEquipoGuardado, onError, $scope.equipo);
+
     };
 
     $scope.btnShowHistorial = function(e){

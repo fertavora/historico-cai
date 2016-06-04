@@ -43,27 +43,27 @@ app.controller('TecnicosCtrl',
     dataService.getPaises(onPaisesComplete, onError);
     dataService.getAllTecnicos(onAllTecnicosComplete, onError);
 
-      $scope.resetForm = function(tecnicoNuevo) {
-          if (tecnicoNuevo) {
-              tecnicoNuevo.$setPristine();
-              tecnicoNuevo.$setUntouched();
-          }
-          $scope.tecnico = angular.copy($scope.master);
-          $scope.tecnico.pais = $scope.paises[1];
-          $scope.tecnico.activo = 1;
-      };
+    $scope.resetForm = function(tecnicoNuevo) {
+        if (tecnicoNuevo) {
+            tecnicoNuevo.$setPristine();
+            tecnicoNuevo.$setUntouched();
+        }
+        $scope.tecnico = angular.copy($scope.master);
+        $scope.tecnico.pais = $scope.paises[1];
+        $scope.tecnico.activo = 1;
+    };
 
     var onTecnicoGuardado = function(response){
       $scope.tecnico = angular.copy($scope.master);
       $scope.tecnico.pais = $scope.paises[1];
       $scope.showMessageOK = true;
-        $scope.resetForm($scope.tecnicoNuevo);
-        $scope.$emit('refreshTecnicos');
+      $scope.resetForm($scope.tecnicoNuevo);
+      $scope.$emit('refreshTecnicos');
       $interval(function(){ $scope.showMessageOK = false; }, 3000);
 
     }
 
-    $scope.submitTecnicoForm = function(t, tecnicoNuevo){
+    $scope.submitTecnicoForm = function(tecnicoNuevo){
       if(tecnicoNuevo.$valid){
           if($scope.tecnico.fecha_nac != undefined){
               $scope.tecnico.fecha_nac = getDateDBFormat($scope.tecnico.fecha_nac);

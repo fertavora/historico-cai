@@ -2,36 +2,46 @@
  * Created by tavete on 4/14/16.
  */
 
-
 var webdriver = require('selenium-webdriver'),
+    assert = require('assert'),
+    test = require('selenium-webdriver/testing'),
     until = webdriver.until,
     By = webdriver.By;
 
-var browser = new webdriver.Builder()
-    .forBrowser('firefox')
-    .build();
-
 var testUrl = 'http://localhost:3000/';
 
-var homePage = require('./homePage');
-homePage.browser = browser;
-homePage.by = By;
+//page objects
+var HomePage = require('./homePage');
+var homePage;
+const timeOut = 15000000;
+var browser;
 
-// var homePage = {
-//     btnGuardar: function(d,b){
-//         return d.findElement(b.id('btnGuardar'));
-//     }
-// };
+test.describe('Mocha Sandbox', function(){
+  this.timeout(timeOut);
+  this.slow(15000);
 
-browser.manage().window().maximize();
-browser.get(testUrl);
-browser.findElement(By.id('diaPartido')).sendKeys("01/04/2016");
-browser.findElement(By.id('instanciaPartido')).sendKeys("01");
-browser.findElement(By.id('btnGuardar')).click();
-browser.wait(until.elementIsVisible(browser.findElement(By.id('guardadoOK')))).then(function(e){
-    console.log(e.value);
+  test.beforeEach(function(){
+    browser = new webdriver.Builder()
+      .forBrowser('firefox')
+      .build();
+
+    homePage = new HomePage(browser);
+
+    browser.manage().window().maximize();
+    browser.get(testUrl);
+
+  });
+
+  test.it('Test A', function(done){
+    homePage.inputDiaPartido().sendKeys("01/04/2016");
+    homePage.inputInstanciaPartido().sendKeys("01");
+    homePage.btnGuardar().click();
+    homePage.isPartidoGuardado().then(function(text){
+      assert.equal(text, "Partido", "Error message does not match!");
+      done();
+    }, function(error){
+      console.error(error);
+      done();
+    });
+  });
 });
-
-// homePage.btnGuardar().click();
-
-// browser.findElement(By.id('btnGuardar')).click();

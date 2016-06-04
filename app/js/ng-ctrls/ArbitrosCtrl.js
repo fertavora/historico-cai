@@ -1,7 +1,7 @@
 'use strict';
 
 app.controller('ArbitrosCtrl',
-  function ArbitrosCtrl ($scope, dataService){
+  function ArbitrosCtrl ($scope, dataService, $interval){
       $scope.showMessageOK = false;
       $scope.arbitro = {};
       $scope.master = {};
@@ -28,19 +28,33 @@ app.controller('ArbitrosCtrl',
       
       dataService.getPaises(onPaisesComplete, onError);
       dataService.getArbitrosOptions(onArbitrosComplete, onError);
-      
+
+      $scope.resetForm = function(arbitroNuevo) {
+        if (arbitroNuevo) {
+          arbitroNuevo.$setPristine();
+          arbitroNuevo.$setUntouched();
+        }
+        $scope.arbitro = angular.copy($scope.master);
+        $scope.arbitro.pais = $scope.paises[1];
+      };
+
       var onArbitroGuardado = function(response){
         $scope.arbitro = angular.copy($scope.master);
         $scope.arbitro.pais = $scope.paises[1];
         $scope.showMessageOK = true;
+        $scope.resetForm($scope.arbitroNuevo);
+        $interval(function(){ $scope.showMessageOK = false; }, 3000);
+        dataService.getArbitrosOptions(onArbitrosComplete, onError);
       }
 
-      $scope.submitArbitroForm = function(){
-        if($scope.arbitro.fecha_nac != undefined){
-          $scope.arbitro.fecha_nac = getDateDBFormat($scope.arbitro.fecha_nac);
-        }else{
-          $scope.arbitro.fecha_nac = null;
+      $scope.submitArbitroForm = function(arbitroNuevo){
+        if(arbitroNuevo.$valid){
+          if($scope.arbitro.fecha_nac != undefined){
+            $scope.arbitro.fecha_nac = getDateDBFormat($scope.arbitro.fecha_nac);
+          }else{
+            $scope.arbitro.fecha_nac = null;
+          }
+          dataService.saveArbitro(onArbitroGuardado, onError, $scope.arbitro);
         }
-        dataService.saveArbitro(onArbitroGuardado, onError, $scope.arbitro);
       }
   });

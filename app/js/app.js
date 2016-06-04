@@ -8,6 +8,38 @@ var app = angular.module('myApp', ['ngRoute'])
             }, 1);
         };
   })
+  .factory('myInterceptor', function($q) {
+    return {
+      // optional method
+      'request': function (config) {
+        // console.log('request ok on interceptor');
+        return config;
+      },
+
+      // optional method
+      'requestError': function (rejection) {
+        console.log('requestError on interceptor');
+        console.log(rejection);
+        return $q.reject(rejection);
+      },
+
+
+      // optional method
+      'response': function (response) {
+        // console.log('response on interceptor');
+        return response;
+      },
+
+      // optional method
+      'responseError': function (rejection) {
+        console.log('responseError on interceptor');
+        return $q.reject(rejection);
+      }
+    }
+  })
+  .config(['$httpProvider', function($httpProvider) {
+    $httpProvider.interceptors.push('myInterceptor');
+  }])
   .config(function($routeProvider){
     $routeProvider.when('/',
       {

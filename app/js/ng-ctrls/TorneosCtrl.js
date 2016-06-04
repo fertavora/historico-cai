@@ -1,8 +1,9 @@
 'use strict';
 
 app.controller('TorneosCtrl',
-  function TorneosCtrl($scope, dataService){
+  function TorneosCtrl($scope, dataService, $filter, $interval){
     $scope.torneoInstancia = {};
+    $scope.torneoInstancia.anio = new Date().getFullYear();
     $scope.master = {};
     $scope.showMessageInstanciaOK = false;
     $scope.showMessageTorneoOK = false;
@@ -14,30 +15,54 @@ app.controller('TorneosCtrl',
     };
 
     var onTorneosOptionsComplete = function(response){
-      $scope.tipoTorneos = response.data;
+      $scope.tipoTorneos = $filter('orderBy')(response.data, 'torneos_nombre');
       $scope.torneoInstancia.torneo = $scope.tipoTorneos[7];
     }
 
     var onTorneosTodos = function(response){
-      $scope.torneosTodos = response.data;
+      $scope.torneosTodos = $filter('orderBy')(response.data, '-torneos_instancias_anio');
     }
 
     dataService.getTorneosOptions(onTorneosOptionsComplete, onError);
 
     dataService.getTorneosTodos(onTorneosTodos, onError);
 
-    $scope.submitTorneosInstanciaNuevoForm = function(){
-      dataService.saveTorneoInstancia(onTorneoInstanciaGuardado, onError, $scope.torneoInstancia);
+    $scope.submitTorneosInstanciaNuevoForm = function(nuevoTorneoInstancia){
+      if(nuevoTorneoInstancia.$valid){
+        dataService.saveTorneoInstancia(onTorneoInstanciaGuardado, onError, $scope.torneoInstancia);
+      }
+
     }
+
+    $scope.resetFormTorneoInstancia = function(nuevoTorneoInstancia) {
+      if (nuevoTorneoInstancia) {
+        nuevoTorneoInstancia.$setPristine();
+        nuevoTorneoInstancia.$setUntouched();
+      }
+      $scope.torneoInstancia = angular.copy($scope.master);
+      $scope.torneoInstancia.torneo = $scope.tipoTorneos[7];
+    };
+
+    $scope.resetFormTorneo = function(nuevoTorneo) {
+      if (nuevoTorneo) {
+        nuevoTorneo.$setPristine();
+        nuevoTorneo.$setUntouched();
+      }
+      $scope.torneo = angular.copy($scope.master);
+      $scope.torneo.tipo = "N";
+    };
 
     var onTorneoInstanciaGuardado = function(){
-      $scope.torneoInstancia = angular.copy($scope.master); //this is to reset form and object partido
-      $scope.torneoInstancia.torneo = $scope.tipoTorneos[7];
+      $scope.resetFormTorneoInstancia($scope.nuevoTorneoInstancia);
+      // $scope.$emit('refreshTorneos');
       $scope.showMessageInstanciaOK = true;
+      $interval(function(){ $scope.showMessageInstanciaOK = false; }, 3000);
     }
 
-    $scope.submitTorneoNuevoForm = function(){
-      dataService.saveTorneo(onTorneoGuardado, onError, $scope.torneo);
+    $scope.submitTorneoNuevoForm = function(nuevoTorneo){
+      if(nuevoTorneo.$valid){
+        dataService.saveTorneo(onTorneoGuardado, onError, $scope.torneo);
+      }
     }
 
     $scope.btnShowHistorial = function(t){
@@ -68,9 +93,9 @@ app.controller('TorneosCtrl',
     }
 
     var onTorneoGuardado = function(){
-      $scope.torneo = angular.copy($scope.master);
-      $scope.torneo.tipo = "N";
+      $scope.resetFormTorneo($scope.nuevoTorneo);
       $scope.showMessageTorneoOK = true;
+      $interval(function(){ $scope.showMessageTorneoOK = false; }, 3000);
     }
 
     //this event is triggered at the end of the methods table ng-repeat, see directive in app.js
@@ -78,3 +103,4 @@ app.controller('TorneosCtrl',
       $('.btnHistorial').tooltip();
     });
   });
+//todo falta el refresh de lista torneos despues de crear torneo nuevo

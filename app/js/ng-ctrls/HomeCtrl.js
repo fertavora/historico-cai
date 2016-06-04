@@ -8,14 +8,14 @@ app.controller('HomeCtrl',
     $scope.limitPartidos = $scope.limits[0];
     var onPartidosComplete = function(response){
       $scope.partidos = response.data;
-    }
+    };
 
     var onError = function(reason){
       $scope.error = "Error!";
     };
 
     //this event is to refresh the partidos list, triggered at PartidoNuevoCtrl.$scope.$emit('refreshPartidos');
-    $scope.$on('refreshPartidos', function(event){
+    $scope.$on('refreshPartidos', function(){
       dataService.getPartidosHome(onPartidosComplete, onError);
     });
 

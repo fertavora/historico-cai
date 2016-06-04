@@ -1,17 +1,18 @@
 'use strict';
 
 app.controller('PartidoNuevoCtrl',
-  function PartidoNuevoCtrl($scope, dataService, $interval){
+  function PartidoNuevoCtrl($scope, dataService, $interval, $filter){
     $scope.master = {};
     $scope.showMessageOK = false;
     $scope.partido = {};
 
     var onError = function(reason){
+      console.log(reason);
       $scope.error = "Error!";
     };
 
     var onEquiposComplete = function(response){
-      $scope.equipos = response.data;
+      $scope.equipos = $filter('orderBy')(response.data, 'equipos_nombre');
       $scope.partido.equipo = $scope.equipos[0];
     }
 
@@ -26,7 +27,8 @@ app.controller('PartidoNuevoCtrl',
     }
 
     var onTecnicoComplete = function(response){
-      $scope.tecnicos = response.data;
+      $scope.tecnicos = $filter('filter')(response.data, {tecnicos_activo:1});
+      // filter:{tecnicos_activo:1}
       $scope.partido.tecnico = $scope.tecnicos[0];
     }
 
