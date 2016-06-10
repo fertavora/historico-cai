@@ -37,18 +37,22 @@ app.controller('EquiposCtrl',
       $scope.error = "Error!";
     };
 
+    var onEquiposComplete = function(response){
+      $scope.equipos = $filter('orderBy')(response.data, 'equipos_nombre');
+    }
+
     var onPaisesComplete =  function(response){
-      $scope.paises = response.data;
+      $scope.paises = $filter('orderBy')(response.data, 'paises_nombre');
       $scope.equipo.pais = $scope.paises[1];
     };
 
     var onCiudadesComplete =  function(response){
-      $scope.ciudades = response.data;
+      $scope.ciudades = $filter('orderBy')(response.data, 'ciudades_nombre');
       $scope.equipo.ciudad = $scope.ciudades[11];
     };
 
     var onProvinciasComplete =  function(response){
-      $scope.provincias = response.data;
+      $scope.provincias = $filter('orderBy')(response.data, 'provincia_nombre');
       $scope.equipo.provincia = $scope.provincias[4];
     };
 
@@ -59,12 +63,8 @@ app.controller('EquiposCtrl',
       $scope.equipo.provincia = $scope.provincias[4];
       $scope.showMessageEquipoOK = true;
       $interval(function(){ $scope.showMessageEquipoOK = false; }, 3000);
+      dataService.getEquiposOptions(onEquiposComplete, onError);
     };
-
-    var onEquiposComplete = function(response){
-      $scope.equipos = $filter('orderBy')(response.data, 'equipos_nombre');
-      // $scope.equipos = response.data;
-    }
 
     var onHistorialEquipo = function(response){
       $scope.partidosHistorial = response.data;
@@ -76,6 +76,7 @@ app.controller('EquiposCtrl',
         $scope.historialGolesContra += item.partidos_goles_rival;
         $scope.historialJugados++;
       });
+      //todo query de historial
     }
 
     dataService.getPaises(onPaisesComplete, onError);
@@ -87,6 +88,17 @@ app.controller('EquiposCtrl',
     $('#tableHistorial td').css("text-align", "center");
     $('#tableHistorial tH').css("text-align", "center");
 
+    $scope.resetFormEquipo = function(nuevoEquipo) {
+      if (nuevoEquipo) {
+        nuevoEquipo.$setPristine();
+        nuevoEquipo.$setUntouched();
+      }
+      $scope.equipo = angular.copy($scope.master);
+      $scope.equipo.pais = $scope.paises[1];
+      $scope.equipo.ciudad = $scope.ciudades[11];
+      $scope.equipo.provincia = $scope.provincias[4];
+    };
+
     $scope.submitEquipoNuevoForm = function(nuevoEquipo){
       if(nuevoEquipo.$valid){
         if($scope.equipo.fecha != undefined){
@@ -95,6 +107,7 @@ app.controller('EquiposCtrl',
           $scope.equipo.fecha = null;
         }
         dataService.saveEquipo(onEquipoGuardado, onError, $scope.equipo);
+        $scope.resetFormEquipo(nuevoEquipo);
       }
 
     };

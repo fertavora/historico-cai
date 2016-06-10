@@ -16,7 +16,11 @@ app.controller('TorneosCtrl',
 
     var onTorneosOptionsComplete = function(response){
       $scope.tipoTorneos = $filter('orderBy')(response.data, 'torneos_nombre');
-      $scope.torneoInstancia.torneo = $scope.tipoTorneos[7];
+      var l = $scope.tipoTorneos.length;
+      while(l--){
+        if($scope.tipoTorneos[l].torneos_nombre === 'Primera División AFA') break;
+      }
+      $scope.torneoInstancia.torneo = $scope.tipoTorneos[l];
     }
 
     var onTorneosTodos = function(response){
@@ -54,7 +58,7 @@ app.controller('TorneosCtrl',
 
     var onTorneoInstanciaGuardado = function(){
       $scope.resetFormTorneoInstancia($scope.nuevoTorneoInstancia);
-      // $scope.$emit('refreshTorneos');
+      dataService.getTorneosTodos(onTorneosTodos, onError);
       $scope.showMessageInstanciaOK = true;
       $interval(function(){ $scope.showMessageInstanciaOK = false; }, 3000);
     }
@@ -94,6 +98,7 @@ app.controller('TorneosCtrl',
 
     var onTorneoGuardado = function(){
       $scope.resetFormTorneo($scope.nuevoTorneo);
+      dataService.getTorneosOptions(onTorneosOptionsComplete, onError);
       $scope.showMessageTorneoOK = true;
       $interval(function(){ $scope.showMessageTorneoOK = false; }, 3000);
     }
@@ -103,4 +108,3 @@ app.controller('TorneosCtrl',
       $('.btnHistorial').tooltip();
     });
   });
-//todo falta el refresh de lista torneos despues de crear torneo nuevo

@@ -56,7 +56,7 @@ app.factory('dataService', function($http, $location){
         },
     
         saveEquipo: function(response, error, data){
-          $http.post(urlPrefix + "/api/guardar-equipo", data)
+          $http.post(urlPrefix + "/api/equipos", data)
             .then(response, error);
         },
     
