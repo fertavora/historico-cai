@@ -3,16 +3,17 @@
  */
 
 'use strict';
+angular.module('myApp')
 
-app.directive('listadoTecnicos', function(){
+.directive('listadoTecnicos', function(){
     return{
         restrict: 'E',
         replace: true,
         templateUrl: '/templates/tecnicos/listado-tecnicos.html'
     }
-});
+})
 
-app.directive('formTecnico', function(){
+.directive('formTecnico', function(){
    return {
        restrict: 'E',
        replace: true,

@@ -1,40 +1,19 @@
-/*
-This files runs the 'server' that hosts the nodejs app.
-  Run:
-    node init
-
-  Go to http://localhost:3000
-*/
 
 var express = require('express');
 var bodyParser = require('body-parser');
-var logger = require('./logger');
-
-
-var mongoose = require('mongoose');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var reload = require('reload');
+var http = require('http');
 
 var app = express();
-
-app.use(passport.initialize());
-// app.use(passport.session());
-
+app.set('port', process.env.PORT || 5000)
 app.use(bodyParser.json()); // for parsing application/json
 app.use('/', express.static('./app'));
-app.use('/', routes);
+// app.listen(process.env.SITE_PORT || 5000);
 
-// passport config
-var Account = require('./models/account');
-passport.use(new LocalStrategy(Account.authenticate()));
-passport.serializeUser(Account.serializeUser());
-passport.deserializeUser(Account.deserializeUser());
+var server = http.createServer(app);
 
-// mongoose
-mongoose.connect('mongodb://localhost/passport_local_mongoose_express4');
+reload(server, app);
 
-
-var server = app.listen(3000);
+server.listen(app.get('port'), function(){
+  console.log("Web server listening on port " + app.get('port'));
+});

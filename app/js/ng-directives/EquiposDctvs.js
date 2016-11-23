@@ -2,24 +2,25 @@
  * Created by tavete on 4/14/16.
  */
 'use strict';
+angular.module('myApp')
 
-app.directive('formEquipo', function(){
+.directive('formEquipo', function(){
     return {
         restrict: 'E',
         replace: true,
         templateUrl: 'templates/equipos/form-equipo.html'
     }
-});
+})
 
-app.directive('historialEquipo', function(){
+.directive('historialEquipo', function(){
     return {
         restrict: 'E',
         replace: true,
         templateUrl: 'templates/equipos/historial-equipo.html',
     }
-});
+})
 
-app.directive('listadoEquipos', function(){
+.directive('listadoEquipos', function(){
     return {
         restrict: 'E',
         replace: true,

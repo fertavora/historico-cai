@@ -3,17 +3,18 @@
  */
 
 'use strict';
+angular.module('myApp')
 
-app.directive('ultimosPartidos', function(){
+.directive('ultimosPartidos', function(){
    return {
        restrict: 'E',
        replace: true,
        templateUrl: 'templates/ultimos-partidos.html'
    }
 
-});
+})
 
-app.directive('partidoNuevo', function(){
+.directive('partidoNuevo', function(){
    return{
        restrict: 'E',
        replace: true,

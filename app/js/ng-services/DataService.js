@@ -1,4 +1,8 @@
-app.factory('dataService', function($http, $location){
+'use strict';
+
+angular.module('myApp')
+
+  .factory('dataService', function($http, $location){
     // var urlPrefix = "http://"+$location.host() + ":" + $location.port();
     var urlPrefix = "http://localhost:3001";
     // var urlPrefix = "http://historial-cai-api.herokuapp.com";

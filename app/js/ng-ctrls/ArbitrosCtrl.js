@@ -1,6 +1,8 @@
 'use strict';
 
-app.controller('ArbitrosCtrl',
+angular.module('myApp')
+
+.controller('ArbitrosCtrl',
   function ArbitrosCtrl ($scope, dataService, $interval){
       $scope.showMessageOK = false;
       $scope.arbitro = {};

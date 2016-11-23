@@ -1,6 +1,7 @@
 'use strict';
+angular.module('myApp')
 
-app.controller('EquiposCtrl',
+.controller('EquiposCtrl',
   function EquiposCtrl($scope, dataService, $interval, $filter){
     $scope.showMessageEquipoOK = false;
     $scope.showHistorialPanel = false;

@@ -1,6 +1,8 @@
 'use strict';
 
-app.controller('TecnicosCtrl',
+angular.module('myApp')
+
+.controller('TecnicosCtrl',
   function TecnicosCtrl($scope, dataService, $interval){
     $scope.showMessageOK = false;
     $scope.tecnico = {};
