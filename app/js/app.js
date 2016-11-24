@@ -19,39 +19,39 @@ angular.module('myApp', [
         };
   }])
   
-  // .factory('myInterceptor', function($q) {
-  //   return {
-  //     // optional method
-  //     'request': function (config) {
-  //       // console.log('request ok on interceptor');
-  //       return config;
-  //     },
+  .factory('myInterceptor', function($q) {
+    return {
+      // optional method
+      'request': function (config) {
+        // console.log('request ok on interceptor');
+        return config;
+      },
 
-  //     // optional method
-  //     'requestError': function (rejection) {
-  //       console.log('requestError on interceptor');
-  //       console.log(rejection);
-  //       return $q.reject(rejection);
-  //     },
+      // optional method
+      'requestError': function (rejection) {
+        console.log('requestError on interceptor');
+        console.log(rejection);
+        return $q.reject(rejection);
+      },
 
 
-  //     // optional method
-  //     'response': function (response) {
-  //       // console.log('response on interceptor');
-  //       return response;
-  //     },
+      // optional method
+      'response': function (response) {
+        // console.log('response on interceptor');
+        return response;
+      },
 
-  //     // optional method
-  //     'responseError': function (rejection) {
-  //       console.log('responseError on interceptor');
-  //       return $q.reject(rejection);
-  //     }
-  //   }
-  // })
+      // optional method
+      'responseError': function (rejection) {
+        console.log('responseError on interceptor');
+        return $q.reject(rejection);
+      }
+    }
+  })
   
-  // .config(['$httpProvider', function($httpProvider) {
-  //   $httpProvider.interceptors.push('myInterceptor');
-  // }])
+  .config(['$httpProvider', function($httpProvider) {
+    $httpProvider.interceptors.push('myInterceptor');
+  }])
   
   .config(['$routeProvider', function($routeProvider){
     $routeProvider
