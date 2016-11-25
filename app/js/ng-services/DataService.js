@@ -5,7 +5,8 @@ angular.module('myApp')
   .factory('dataService', function($http, $location){
     // var urlPrefix = "http://"+$location.host() + ":" + $location.port();
     // var urlPrefix = "http://localhost:3001";
-    var urlPrefix = "http://historial-cai-api.herokuapp.com";
+    // var urlPrefix = "http://historial-cai-api.herokuapp.com";
+    var urlPrefix = "https://historial-cai-api-fertavora.c9users.io";
 
 
     return{

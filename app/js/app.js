@@ -53,6 +53,7 @@ angular.module('myApp', [
     $httpProvider.interceptors.push('myInterceptor');
   }])
   
+  //routes
   .config(['$routeProvider', function($routeProvider){
     $routeProvider
       .when('/login', 
