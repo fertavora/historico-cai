@@ -7,7 +7,7 @@ angular.module('myApp')
     // var urlPrefix = "http://localhost:3001";
     // var urlPrefix = "http://historial-cai-api.herokuapp.com";
     var urlPrefix = "https://historial-cai-api-fertavora.c9users.io";
-
+    var apiAuth = 'Basic aGlzdG9yaWFsY2FpOmVjck01NHVseE4=';
 
     return{
         getEquiposOptions: function(response, error){
@@ -21,7 +21,8 @@ angular.module('myApp')
         },
     
         getArbitrosOptions: function(response, error){
-          $http.get(urlPrefix + "/api/arbitros")
+            $http.defaults.headers.common.Authorization = apiAuth;
+          $http.get(urlPrefix + "/v0/arbitro")
               .then(response, error);
         },
     
